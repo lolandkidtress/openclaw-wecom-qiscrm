@@ -10,9 +10,27 @@ OpenClaw WeCom channel plugin via Qiscrm API for [OpenClaw](https://github.com/o
 
 ### Installation
 
+#### Install From NPM
+
 ```bash
 openclaw plugins install @lolandkidtress/openclaw-wecom-qiscrm
 ```
+
+### Upgrade
+
+```bash
+openclaw plugins update openclaw-wecom-qiscrm
+```
+
+#### From source
+
+```bash
+git clone https://github.com/lolandkidtress/openclaw-wecom-qiscrm.git
+cd openclaw-wecom-qiscrm
+pnpm install
+openclaw plugins install -l ../openclaw-wecom-qiscrm
+```
+
 
 ### Upgrade
 
@@ -57,15 +75,6 @@ channels:
     orgId: "your-org-id"                 # Required - Organization ID
     wxId: "wxid_xxx"                     # Required - WeChat ID
     freWxId: "wxid_friend"               # Required - Friend WeChat ID
-
-    # Multi-account configuration (optional)
-    accounts:
-      work:
-        wxId: "wxid_work"
-        freWxId: "wxid_work_friend"
-      personal:
-        wxId: "wxid_personal"
-        freWxId: "wxid_personal_friend"
 ```
 
 ### Features
@@ -97,6 +106,8 @@ channels:
 
 ### 安装
 
+#### 方式一：从 npm 安装
+
 ```bash
 openclaw plugins install @lolandkidtress/openclaw-wecom-qiscrm
 ```
@@ -104,8 +115,27 @@ openclaw plugins install @lolandkidtress/openclaw-wecom-qiscrm
 ### 升级
 
 ```bash
-openclaw plugins update wecom-qiscrm
+openclaw plugins update openclaw-wecom-qiscrm
 ```
+
+#### 方式二：从源码安装
+
+```bash
+git clone https://github.com/lolandkidtress/openclaw-wecom-qiscrm.git
+cd openclaw-wecom-qiscrm
+pnpm install
+openclaw plugins install -l ../openclaw-wecom-qiscrm
+```
+
+#### 更新源码
+
+```bash
+git pull origin main
+pnpm install
+pnpm build
+```
+
+> 链接模式下构建后即生效，重启 Gateway 即可。
 
 ### 配置
 
@@ -144,15 +174,6 @@ channels:
     orgId: "your-org-id"               # 必填 - 组织 ID
     wxId: "wxid_xxx"                   # 必填 - 企业微信 ID
     freWxId: "wxid_friend"             # 必填 - 好友微信 ID
-
-    # 多账号配置（可选）
-    accounts:
-      work:
-        wxId: "wxid_work"
-        freWxId: "wxid_work_friend"
-      personal:
-        wxId: "wxid_personal"
-        freWxId: "wxid_personal_friend"
 ```
 
 ### 功能
