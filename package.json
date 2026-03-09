@@ -1,0 +1,60 @@
+{
+  "name": "@lolandkidtress/openclaw-wecom-qiscrm",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "OpenClaw WeCom channel plugin via Qiscrm API",
+  "license": "MIT",
+  "files": [
+    "index.ts",
+    "src",
+    "openclaw.plugin.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lolandkidtress/openclaw-wecom-qiscrm.git"
+  },
+  "keywords": [
+    "openclaw",
+    "wecom",
+    "qiscrm",
+    "企业微信",
+    "chatbot",
+    "ai",
+    "claude"
+  ],
+  "openclaw": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "channel": {
+      "id": "openclaw-wecom-qiscrm",
+      "label": "WeCom QISCRM",
+      "selectionLabel": "WeCom QISCRM (企业微信)",
+      "docsPath": "/channels/openclaw-wecom-qiscrm",
+      "docsLabel": "openclaw-wecom-qiscrm",
+      "blurb": "WeCom QISCRM channel via Polling API. 购买 API Key 请联系客服",
+      "order": 80
+    },
+    "install": {
+      "npmSpec": "@lolandkidtress/openclaw-wecom-qiscrm",
+      "localPath": ".",
+      "defaultChoice": "npm"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "openclaw": ">=2026.2.9",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0",
+    "zod": "^3.22.4"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.2.9"
+  },
+  "scripts": {
+    "test": "npx tsx test-channel.ts",
+    "test:plugin": "npx tsx test-plugin.ts",
+    "typecheck": "tsc --noEmit"
+  }
+}
