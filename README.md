@@ -1,6 +1,6 @@
 # openclaw-wecom-qiscrm
 
-Qiscrm (企业微信) channel plugin for [OpenClaw](https://github.com/openclaw/openclaw).
+OpenClaw WeCom channel plugin via Qiscrm API for [OpenClaw](https://github.com/openclaw/openclaw).
 
 [English](#english) | [中文](#中文)
 
