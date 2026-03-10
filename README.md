@@ -202,6 +202,9 @@ channels:
 4. 检查 gateway 状态：`openclaw gateway status`
 
 ---
+## 联系客服
+
+WhatsApp: 85254200437
 
 ## 申 明
 

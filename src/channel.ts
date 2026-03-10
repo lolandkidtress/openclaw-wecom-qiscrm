@@ -3,6 +3,9 @@ import { DEFAULT_ACCOUNT_ID } from "openclaw/plugin-sdk";
 import type { ResolvedQiscrmAccount, QiscrmConfig, QiscrmAccountConfig } from "./types.js";
 import { handleQiscrmMessage } from "./bot.js";
 
+// 跟踪每个账号的轮询状态
+const runningPollLoops = new Map<string, { stop: () => void }>();
+
 // 插件元数据
 // openclaw config set channels.openclaw-openclaw-wecom-qiscrm.baseUrl "http://your-api-server"
 // openclaw config set channels.openclaw-openclaw-wecom-qiscrm.apiKey "your-api-key"
@@ -548,6 +551,14 @@ export const wecomQiscrmPlugin: ChannelPlugin<ResolvedQiscrmAccount> = {
       const log = runtime?.log ?? console.log;
       const error = runtime?.error ?? console.error;
 
+      // 检查是否已有轮询在运行，如果有则先停止
+      const existingLoop = runningPollLoops.get(accountId);
+      if (existingLoop) {
+        log(`Stopping existing poll loop for account: ${accountId}`);
+        existingLoop.stop();
+        runningPollLoops.delete(accountId);
+      }
+
       const account = resolveQiscrmAccount({ cfg, accountId });
 
       log(`Starting Qiscrm account: ${accountId}`);
@@ -596,7 +607,9 @@ export const wecomQiscrmPlugin: ChannelPlugin<ResolvedQiscrmAccount> = {
           }
 
           // 等待下一个轮询间隔
+          log(`Waiting ${POLL_INTERVAL}ms before next poll...`);
           await new Promise((resolve) => setTimeout(resolve, POLL_INTERVAL));
+          log(`Poll interval complete, starting next poll`);
         }
       };
 
@@ -613,13 +626,17 @@ export const wecomQiscrmPlugin: ChannelPlugin<ResolvedQiscrmAccount> = {
       log(`Qiscrm account ${accountId} started successfully`);
 
       // 返回停止函数
-      return {
-        async stop() {
-          running = false;
-          setStatus({ accountId, running: false });
-          log(`Qiscrm account ${accountId} stopped`);
-        },
+      const stopFn = () => {
+        running = false;
+        runningPollLoops.delete(accountId);
+        setStatus({ accountId, running: false });
+        log(`Qiscrm account ${accountId} stopped`);
       };
+
+      // 保存停止函数到全局映射
+      runningPollLoops.set(accountId, { stop: stopFn });
+
+      return { stop: stopFn };
     },
   },
 
