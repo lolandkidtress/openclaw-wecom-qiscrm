@@ -1,5 +1,5 @@
 {
-  "name": "@lolandkidtress/openclaw-wecom-qiscrm",
+  "name": "openclaw-wecom-qiscrm",
   "version": "0.1.0",
   "type": "module",
   "description": "OpenClaw WeCom channel plugin via Qiscrm API",
@@ -36,7 +36,7 @@
       "order": 80
     },
     "install": {
-      "npmSpec": "@lolandkidtress/openclaw-wecom-qiscrm",
+      "npmSpec": "openclaw-wecom-qiscrm",
       "localPath": ".",
       "defaultChoice": "npm"
     }

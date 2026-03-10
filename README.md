@@ -2,6 +2,8 @@
 
 OpenClaw WeCom channel plugin via Qiscrm API for [OpenClaw](https://github.com/openclaw/openclaw).
 
+企业微信 与 外部联系人聊天 OpenClaw 扩展插件
+
 [English](#english) | [中文](#中文)
 
 ---
@@ -13,7 +15,7 @@ OpenClaw WeCom channel plugin via Qiscrm API for [OpenClaw](https://github.com/o
 #### Install From NPM
 
 ```bash
-openclaw plugins install @lolandkidtress/openclaw-wecom-qiscrm
+openclaw plugins install openclaw-wecom-qiscrm
 ```
 
 ### Upgrade
@@ -109,7 +111,7 @@ channels:
 #### 方式一：从 npm 安装
 
 ```bash
-openclaw plugins install @lolandkidtress/openclaw-wecom-qiscrm
+openclaw plugins install openclaw-wecom-qiscrm
 ```
 
 ### 升级
