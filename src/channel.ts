@@ -2,6 +2,24 @@ import type { ChannelPlugin, ClawdbotConfig } from "openclaw/plugin-sdk";
 import { DEFAULT_ACCOUNT_ID } from "openclaw/plugin-sdk";
 import type { ResolvedQiscrmAccount, QiscrmConfig, QiscrmAccountConfig } from "./types.js";
 import { handleQiscrmMessage } from "./bot.js";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
+
+// 动态获取插件版本
+function getPluginVersion(): string {
+  try {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = dirname(__filename);
+    const packageJsonPath = join(__dirname, "..", "package.json");
+    const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
+    return packageJson.version || "0.1.1";
+  } catch {
+    return "0.1.1";
+  }
+}
+
+const PLUGIN_VERSION = getPluginVersion();
 
 // 跟踪每个账号的轮询状态
 const runningPollLoops = new Map<string, { stop: () => void }>();
@@ -42,6 +60,7 @@ class QiscrmClient {
       secret: this.apiKey,
       wxId,
       freWxId,
+      version: PLUGIN_VERSION,
     };
 
     const response = await fetch(url, {
